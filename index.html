@@ -77,7 +77,7 @@
               .done(function( data ) {
                 $('#pug_bay').waitForImages(function() {
                   $('#loading').before('<img id="pug_pic" src="'+data+'" style="display:none;">');
-                  $('#pug_pic').addEventListener('load', function () {
+                  $('#pug_pic').load(function () {
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
