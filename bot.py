@@ -12,11 +12,11 @@ for sr in ['pugs', 'pug', 'Puggifs']:
     pugs = db.pugs
 
     r = praw.Reddit(user_agent='pugsmakemehappy')
-    submissions = r.get_subreddit(sr).get_top(limit=None)
+    submissions = r.get_subreddit(sr).get_top_from_all(limit=None)
     xx = 0
     for x in submissions:
         xx += 1
-        print str(xx)+" >>> "+x.url
+        print str(xx)+" >>> "+x.url+" ("+sr+")"
         not_a_gif = 0
         if pugs.find_one({"$or": [{"id": x.id}, {"url": x.url}]}):
             print "Dupe: "+x.url
