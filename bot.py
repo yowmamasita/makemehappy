@@ -16,14 +16,15 @@ for x in submissions:
         print "Dupe: "+x.url
         continue
     else:
-        response = requests.get(x.url)
+        response = requests.get(x.url, stream=True)
         while response.status_code != 200:
             print "Request error: "+x.url
             time.sleep(15)
             response = requests.get(x.url)
         filepath = "/var/www/cess/makemehappy/test.gif"
-        f = open(filepath,'w')
-        f.write(response.content)
+        with open(filepath, 'w') as f:
+            for chunk in r.iter_content():
+                f.write(chunk)
         f.close()
         gif = Image.open(filepath)
         try:
