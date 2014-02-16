@@ -5,7 +5,10 @@ client = MongoClient()
 db = client.makemehappy
 pugs = db.pugs
 
-rand = random.random()*pugs.count()
+x = 100
+while x > 0:
+	rand = int(random.random()*pugs.count())
+	print rand; x -= 1
 pug = pugs.find().limit(-1).skip(rand).next()
 
 print pug['url']
