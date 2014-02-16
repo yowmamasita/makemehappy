@@ -4,6 +4,7 @@ import datetime
 import requests
 import time
 import Image
+import magic
 
 client = MongoClient()
 db = client.makemehappy
@@ -20,12 +21,16 @@ for x in submissions:
         while response.status_code != 200:
             print "Request error: "+x.url
             time.sleep(15)
-            response = requests.get(x.url)
+            response = requests.get(x.url, stream=True)
         filepath = "/var/www/cess/makemehappy/test.gif"
         with open(filepath, 'w') as f:
+            mime = magic.from_buffer(response.iter_content().next(), mime=True)
+            if mime != "image/gif":
+                print "Not a gif: "+x.url
+                continue
             for chunk in response.iter_content():
                 f.write(chunk)
-        f.close()
+        # f.close()
         gif = Image.open(filepath)
         try:
             gif.seek(1)
