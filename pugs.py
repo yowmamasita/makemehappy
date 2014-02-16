@@ -10,7 +10,7 @@ pugs = db.pugs
 @app.route("/")
 def hello():
     rand = int(random.random()*pugs.count())
-    pug = pugs.find().limit(-1).skip(rand).next()
+    pug = pugs.find({"animated": 1}).limit(-1).skip(rand).next()
     return '<img src="'+pug['url']+'">'
 
 if __name__ == "__main__":
