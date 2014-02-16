@@ -12,7 +12,8 @@ for sr in ['pugs', 'pug', 'Puggifs']:
     pugs = db.pugs
 
     r = praw.Reddit(user_agent='pugsmakemehappy')
-    submissions = r.get_subreddit(sr).get_top_from_all(limit=None)
+    # submissions = r.get_subreddit(sr).get_top_from_all(limit=None)
+    submissions = r.get_subreddit(sr).get_new(limit=None)
     xx = 0
     for x in submissions:
         xx += 1
