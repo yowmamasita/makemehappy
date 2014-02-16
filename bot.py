@@ -19,7 +19,7 @@ for sr in ['pugs', 'pug', 'Puggifs']:
         print str(xx)+" >>> "+x.url+" ("+sr+")"
         not_a_gif = 0
         if pugs.find_one({"$or": [{"id": x.id}, {"url": x.url}]}):
-            print "Dupe: "+x.url
+            # print "Dupe: "+x.url
             continue
         else:
             try:
@@ -42,24 +42,27 @@ for sr in ['pugs', 'pug', 'Puggifs']:
                 f.write(chunk)
                 mime = magic.from_buffer(chunk, mime=True)
                 if "image" not in mime:
-                    print mime+" not a gif: "+x.url
+                    # print mime+" not a gif: "+x.url
                     not_a_gif = 1
                 else:
                     for chunk in response.iter_content(256):
                         f.write(chunk)
             # f.close()
             if not_a_gif == 0:
+                animated = 0
                 gif = Image.open(filepath)
                 try:
                     gif.seek(1)
                 except EOFError:
-                    print "Not animated: "+x.url
+                    animated = 0
+                    # print "Not animated: "+x.url
                 else:
+                    animated = 1
                     print "Animated: "+x.url
                 post = {"id": x.id,
                         "url": x.url,
                         "likes": 1,
-                        "animated": not_a_gif,
+                        "animated": animated,
                         "mime": mime,
                         "date": datetime.datetime.utcnow()}
                 pugs.insert(post)
