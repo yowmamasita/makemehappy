@@ -36,15 +36,15 @@
       </div>
 
       <div class="jumbotron">
-        <div name="pug_bay">
-          <h1 name="pug_bay_header">Feeling stressed?</h1>
-          <p name="pug_bay_teaser" class="lead">Click the green button below.</p>
+        <div id="pug_bay">
+          <h1 id="pug_bay_header">Feeling stressed?</h1>
+          <p id="pug_bay_teaser" class="lead">Click the green button below.</p>
         </div>
-        <p><a class="btn btn-lg btn-success" href="#" role="button">Make Me Happy :)</a></p>
+        <p><a id="pug_bay_btn" class="btn btn-lg btn-success" href="#" role="button">Make Me Happy :)</a></p>
       </div>
 
       <div class="footer">
-        <p>&copy; Cess Allapitan 2014</p>
+        <p>&copy; Cess Allapitan+Ben Sarmiento 2014</p>
       </div>
 
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
@@ -62,7 +62,23 @@
         </script>
 
         <script>
-
+          var pug_bomb = function () {
+            $('#pug_bay_header').before("<img src=\"static/img/loading.gif\">");
+            $('#pug_bay_header').remove();
+            $('#pug_bay_teaser').text("LOADING");
+            $.ajax({
+              url: "http://arch.cessallapitan.me/pugs"
+            })
+              .done(function( data ) {
+                if ( console && console.log ) {
+                  console.log( "Sample of data:", data.slice( 0, 100 ) );
+                }
+              });
+          };
+          $('#pug_bay_btn').on('click', function () {
+            if (pug_bomb) pug_bomb();
+            pug_bomb = null;
+          });
         </script>
     </body>
 </html>
