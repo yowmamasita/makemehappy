@@ -32,7 +32,7 @@ for x in submissions:
             for chunk in response.iter_content(256):
                 f.write(chunk)
         # f.close()
-        if not not_a_gif:
+        if not_a_gif == False:
             gif = Image.open(filepath)
             try:
                 gif.seek(1)
