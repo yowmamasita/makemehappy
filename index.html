@@ -66,9 +66,10 @@
 
         <script>
           var pug_bomb = function () {
+            if($('#pug_pic')) $('#pug_pic').remove();
             $('#loading').show();
-            $('#pug_bay_header').hide();
             $('#pug_bay_teaser').text("LOADING");
+            $('#pug_bay_btn').hide();
             $.ajax({
               url: "http://arch.cessallapitan.me/pugs"
               //url: "http://localhost/pugs.html"
@@ -76,14 +77,14 @@
               .done(function( data ) {
                 $('#pug_bay').waitForImages(function() {
                   $('#loading').hide();
-                  $('#loading').before('<img id="loading" src="'+data+'">');
+                  $('#loading').before('<img id="pug_pic" src="'+data+'">');
                   $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
                   $('#pug_bay_btn').show();
                 });
               });
           };
           $('#pug_bay_btn').on('click', function () {
-            $('#pug_bay_btn').hide();
+            if($('#pug_bay_header')) $('#pug_bay_header').remove();
             pug_bomb();
           });
         </script>
