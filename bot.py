@@ -22,13 +22,17 @@ for sr in ['pugs', 'pug', 'Puggifs']:
             print "Dupe: "+x.url
             continue
         else:
-            response = requests.get(x.url, stream=True)
-            breaker = 5
-            while response.status_code != 200 and breaker >= 0:
-                breaker -= 1
-                print "Request error: "+x.url
-                time.sleep(15)
+            try:
                 response = requests.get(x.url, stream=True)
+                breaker = 5
+                while response.status_code != 200 and breaker >= 0:
+                    breaker -= 1
+                    print "Request error: "+x.url
+                    time.sleep(15)
+                    response = requests.get(x.url, stream=True)
+            except:
+                print "Request fatal error: "+x.url
+                continue
             if breaker < 0:
                 continue
             filepath = "/var/www/cess/makemehappy/test.gif"
