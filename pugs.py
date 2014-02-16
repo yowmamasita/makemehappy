@@ -11,7 +11,7 @@ pugs = db.pugs
 def hello():
     rand = int(random.random()*pugs.find({"animated": 1}).count())
     pug = pugs.find({"animated": 1}).limit(-1).skip(rand).next()
-    return '<img src="'+pug['url']+'">'
+    return pug['url']
 
 if __name__ == "__main__":
     app.run()
