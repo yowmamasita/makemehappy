@@ -41,11 +41,12 @@ for sr in ['pugs', 'pug', 'Puggifs']:
                 chunk = response.iter_content(256).next()
                 f.write(chunk)
                 mime = magic.from_buffer(chunk, mime=True)
-                if mime != "image/gif":
+                if "image" not in mime:
                     print mime+" not a gif: "+x.url
                     not_a_gif = 1
-                for chunk in response.iter_content(256):
-                    f.write(chunk)
+                else:
+                    for chunk in response.iter_content(256):
+                        f.write(chunk)
             # f.close()
             if not_a_gif == 0:
                 gif = Image.open(filepath)
@@ -61,3 +62,4 @@ for sr in ['pugs', 'pug', 'Puggifs']:
                         "animated": not_a_gif,
                         "mime": mime,
                         "date": datetime.datetime.utcnow()}
+                pugs.insert(post)
