@@ -23,7 +23,7 @@ for x in submissions:
             response = requests.get(x.url)
         filepath = "/var/www/cess/makemehappy/test.gif"
         with open(filepath, 'w') as f:
-            for chunk in r.iter_content():
+            for chunk in response.iter_content():
                 f.write(chunk)
         f.close()
         gif = Image.open(filepath)
