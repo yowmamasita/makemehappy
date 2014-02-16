@@ -76,10 +76,13 @@
             })
               .done(function( data ) {
                 $('#pug_bay').waitForImages(function() {
-                  $('#loading').hide();
-                  $('#loading').before('<img id="pug_pic" src="'+data+'">');
-                  $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
-                  $('#pug_bay_btn').show();
+                  $('#loading').before('<img id="pug_pic" src="'+data+'" style="display:none;">');
+                  $('#pug_pic').addEventListener('load', function () {
+                    $('#loading').hide();
+                    $(this).show();
+                    $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
+                    $('#pug_bay_btn').show();
+                  });
                 });
               });
           };
