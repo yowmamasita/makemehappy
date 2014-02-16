@@ -11,7 +11,7 @@ db = client.makemehappy
 pugs = db.pugs
 
 r = praw.Reddit(user_agent='pugsmakemehappy')
-submissions = r.get_subreddit('Puggifs').get_new(limit=None)
+submissions = r.get_subreddit('pugs+pug+Puggifs').get_new(limit=None)
 for x in submissions:
     print ">>> "+x.url
     not_a_gif = False
