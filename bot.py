@@ -9,7 +9,7 @@ pugs = db.pugs
 r = praw.Reddit(user_agent='pugsmakemehappy')
 submissions = r.get_subreddit('Puggifs').get_new(limit=None)
 for x in submissions:
-    if pugs.find_one({"id": x.id}).count() > 0:
+    if pugs.find_one({"id": x.id}):
         continue
     post = {"id": x.id,
             "url": x.url,
