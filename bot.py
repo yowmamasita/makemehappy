@@ -26,7 +26,9 @@ for x in submissions:
             response = requests.get(x.url, stream=True)
         filepath = "/var/www/cess/makemehappy/test.gif"
         with open(filepath, 'w') as f:
-            mime = magic.from_buffer(response.iter_content(256).next(), mime=True)
+            chunk = response.iter_content(256).next()
+            f.write(chunk)
+            mime = magic.from_buffer(chunk, mime=True)
             if mime != "image/gif":
                 print mime+" not a gif: "+x.url
                 not_a_gif = True
