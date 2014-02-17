@@ -33,7 +33,7 @@ def hello():
 
 @app.route('/login')
 def login():
-    return facebook.authorize(callback='http://arch.cessallapitan.me/makemehappy/login/authorized?next=https%3A%2F%2Fdrive.google.com%2F')
+    return facebook.authorize(callback='http://arch.cessallapitan.me/makemehappy/login/authorized')
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
@@ -51,6 +51,12 @@ def facebook_authorized(resp):
 @facebook.tokengetter
 def get_facebook_oauth_token():
     return session.get('oauth_token')
+
+@app.route('/check')
+def check():
+    me = facebook.get('/me')
+    return 'Logged in as id=%s name=%s redirect=%s' % \
+        (me.data['id'], me.data['name'], request.args.get('next'))
 
 # PUG GENERATORS
 
