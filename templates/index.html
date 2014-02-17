@@ -143,8 +143,7 @@
                   alert(data.error);
                 }
                 else {
-                  $(this).remove();
-                  $('#pug_likes').text($('#pug_likes').text().match(/\d+$/)[0] + " people like this pug");
+                  $('#pug_likes').text($('#pug_likes').text().match(/\d+/)[0] + " people like this pug");
                 }
               });
           });
