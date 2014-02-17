@@ -33,7 +33,7 @@ def hello():
 
 @app.route('/login')
 def login():
-    return facebook.authorize(callback='http://arch.cessallapitan.me/makemehappy/login/authorized', next='https://www.google.com.ph/')
+    return facebook.authorize(callback='http://arch.cessallapitan.me/makemehappy/login/authorized?next=https%3A%2F%2Fdrive.google.com%2F')
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
