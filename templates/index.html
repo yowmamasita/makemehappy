@@ -112,6 +112,7 @@
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
+                    $('#pug_id').val(data.pug_id);
                     $('#pug_likes').text(data.likes + " people like this pug");
                     $('#that_pug_url').val(window.location.origin+'/makemehappy/pug/'+data.pug_id);
                     $('#that_pug').show();
