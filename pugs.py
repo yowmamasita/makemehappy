@@ -43,7 +43,7 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session['oauth_token'] = None
+    session.pop('oauth_token', None)
     return redirect(url_for('hello', _external=True))
 
 @app.route('/login/authorized')
