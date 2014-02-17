@@ -41,6 +41,11 @@ def hello():
 def login():
     return facebook.authorize(callback='http://arch.cessallapitan.me/makemehappy/login/authorized')
 
+@app.route('/logout')
+def logout():
+    session['oauth_token'] = None
+    return redirect(url_for('hello', _external=True))
+
 @app.route('/login/authorized')
 @facebook.authorized_handler
 def facebook_authorized(resp):
