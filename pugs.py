@@ -55,17 +55,11 @@ def facebook_authorized(resp):
             request.args['error_description']
         )
     session['oauth_token'] = (resp['access_token'], '')
-    return redirect(url_for('check', _external=True))
+    return redirect(url_for('hello', _external=True))
 
 @facebook.tokengetter
 def get_facebook_oauth_token():
     return session.get('oauth_token')
-
-@app.route('/check')
-def check():
-    me = facebook.get('/me')
-    return 'Logged in as id=%s name=%s redirect=%s' % \
-        (me.data['id'], me.data['name'], request.args.get('next'))
 
 # PUG GENERATORS
 
