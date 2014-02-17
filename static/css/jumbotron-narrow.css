@@ -77,3 +77,8 @@ body {
     border-bottom: 0;
   }
 }
+
+#pug_pic {
+  width: 100%;
+  max-width: 600px;
+}
