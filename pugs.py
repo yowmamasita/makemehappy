@@ -85,19 +85,19 @@ def that_pug(pug_id=None):
 def random_pugs():
     rand = int(random.random()*pugs.find({"animated": 1}).count())
     pug = pugs.find({"animated": 1}).limit(-1).skip(rand).next()
-    return jsonify({'pug_id': pug['id'], 'likes': pug['likes'], 'url': pug['url']})
+    return jsonify({'pug_id': str(pug['id']), 'likes': pug['likes'], 'url': pug['url']})
 
 @app.route("/pugs_static")
 def random_static_pugs():
     rand = int(random.random()*pugs.find({"animated": 0}).count())
     pug = pugs.find({"animated": 0}).limit(-1).skip(rand).next()
-    return jsonify({'pug_id': pug['id'], 'likes': pug['likes'], 'url': pug['url']})
+    return jsonify({'pug_id': str(pug['id']), 'likes': pug['likes'], 'url': pug['url']})
 
 @app.route("/pugs_mixed")
 def random_mixed_pugs():
     rand = int(random.random()*pugs.find().count())
     pug = pugs.find().limit(-1).skip(rand).next()
-    return jsonify({'pug_id': pug['id'], 'likes': pug['likes'], 'url': pug['url']})
+    return jsonify({'pug_id': str(pug['id']), 'likes': pug['likes'], 'url': pug['url']})
 
 if __name__ == "__main__":
     app.run()

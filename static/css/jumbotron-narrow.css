@@ -82,8 +82,3 @@ body {
   width: 100%;
   max-width: 600px;
 }
-
-a.title:* {
-  color: #333;
-  text-decoration:none;
-}
