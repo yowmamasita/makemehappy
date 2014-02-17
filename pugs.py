@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 import random
-from flask import Flask, render_template, url_for, session, request, redirect
+from flask import Flask, render_template, url_for, session, request, redirect, jsonify
 from flask_oauth import OAuth
 
 SECRET_KEY = 'makemehappy2014'
@@ -85,19 +85,19 @@ def that_pug(pug_id=None):
 def random_pugs():
     rand = int(random.random()*pugs.find({"animated": 1}).count())
     pug = pugs.find({"animated": 1}).limit(-1).skip(rand).next()
-    return pug['url']
+    return jsonify({'id': pug['id'], 'likes': pug['likes'], 'url': pug['url']})
 
 @app.route("/pugs_static")
 def random_static_pugs():
     rand = int(random.random()*pugs.find({"animated": 0}).count())
     pug = pugs.find({"animated": 0}).limit(-1).skip(rand).next()
-    return pug['url']
+    return jsonify({'id': pug['id'], 'likes': pug['likes'], 'url': pug['url']})
 
 @app.route("/pugs_mixed")
 def random_mixed_pugs():
     rand = int(random.random()*pugs.find().count())
     pug = pugs.find().limit(-1).skip(rand).next()
-    return pug['url']
+    return jsonify({'id': pug['id'], 'likes': pug['likes'], 'url': pug['url']})
 
 if __name__ == "__main__":
     app.run()

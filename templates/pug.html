@@ -44,9 +44,8 @@
           <img id="pug_pic" src="{{ pug['url'] }}" style="display:none;">
           <img id="loading" src="/makemehappy/static/img/loading.gif">
           <p id="pug_bay_teaser" class="lead">LOADING</p>
-          <div id="that_pug" class="input-group" style="display:none;">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>
-            <input type="text" value="{{ pug['url'] }}" class="form-control input-lg">
+          <div id="that_pug" style="display:none;">
+            <input id="that_pug_url" type="text" value="{{ pug['url'] }}" class="form-control">
           </div>
         </div>
         <p><a id="pug_bay_btn" class="btn btn-lg btn-success" href="#" role="button" style="display:none;">Make Me Happy :)</a></p>
@@ -85,7 +84,7 @@
             })
               .done(function( data ) {
                 $('#pug_bay').waitForImages(function() {
-                  $('#loading').before('<img id="pug_pic" src="'+data+'" style="display:none;">');
+                  $('#loading').before('<img id="pug_pic" src="'+data.url+'" style="display:none;">');
                   $('#pug_pic').load(function () {
                     $('#loading').hide();
                     $(this).show();

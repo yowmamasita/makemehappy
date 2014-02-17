@@ -44,9 +44,8 @@
           <img id="loading" src="/makemehappy/static/img/loading.gif" style="display:none;">
           <h1 id="pug_bay_header">Feeling stressed?</h1>
           <p id="pug_bay_teaser" class="lead">Click the green button below.</p>
-          <div id="that_pug" class="input-group" style="display:none;">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>
-            <input type="text" value="{{ pug['url'] }}" class="form-control" readonly>
+          <div id="that_pug" style="display:none;">
+            <input id="that_pug_url" type="text" value="" class="form-control">
           </div>
         </div>
         <p><a id="pug_bay_btn" class="btn btn-lg btn-success" href="#" role="button">Make Me Happy :)</a></p>
@@ -85,11 +84,12 @@
             })
               .done(function( data ) {
                 $('#pug_bay').waitForImages(function() {
-                  $('#loading').before('<img id="pug_pic" src="'+data+'" style="display:none;">');
+                  $('#loading').before('<img id="pug_pic" src="'+data.url+'" style="display:none;">');
                   $('#pug_pic').load(function () {
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
+                    $('#that_pug_url').value(data.url);
                     $('#that_pug').show();
                     $('#pug_bay_btn').show();
                   });
