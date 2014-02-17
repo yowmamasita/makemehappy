@@ -45,7 +45,7 @@
           <img id="loading" src="/makemehappy/static/img/loading.gif">
           <p id="pug_bay_teaser" class="lead">LOADING</p>
           <div id="that_pug" style="display:none;">
-            <input id="that_pug_url" type="text" value="{{ pug['url'] }}" class="form-control">
+            <input id="that_pug_url" type="text" value="{{ 'http://arch.cessallapitan.me/makemehappy/pugs/'+pug['id'] }}" class="form-control">
           </div>
         </div>
         <p><a id="pug_bay_btn" class="btn btn-lg btn-success" href="#" role="button" style="display:none;">Make Me Happy :)</a></p>
@@ -89,7 +89,7 @@
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
-                    $('#that_pug_url').val(data.url);
+                    $('#that_pug_url').val(window.location.origin+'/makemehappy/pugs/'+data.pug_id);
                     $('#that_pug').show();
                     $('#pug_bay_btn').show();
                   });

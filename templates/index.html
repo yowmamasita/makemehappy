@@ -89,7 +89,7 @@
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
-                    $('#that_pug_url').val(data.url);
+                    $('#that_pug_url').val(window.location.origin+'/makemehappy/pugs/'+data.pug_id);
                     $('#that_pug').show();
                     $('#pug_bay_btn').show();
                   });
