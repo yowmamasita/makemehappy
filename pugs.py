@@ -29,11 +29,12 @@ facebook = oauth.remote_app('facebook',
 
 @app.route('/')
 def hello():
-    name = None
+    f_id, name = None
     if session.get('oauth_token'):
         me = facebook.get('/me')
+        f_id = me.data['id']
         name = me.data['name']
-    return render_template('index.html', name=name)
+    return render_template('index.html', f_id=f_id, name=name)
 
 @app.route('/login')
 def login():
