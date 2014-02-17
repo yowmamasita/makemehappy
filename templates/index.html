@@ -21,6 +21,26 @@
         <link rel="stylesheet" href="/makemehappy/static/css/jumbotron-narrow.css">
 
         <script src="/makemehappy/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <!-- for Google -->
+        <meta name="description" content="Random pugs to brighten your day" />
+        <meta name="keywords" content="dog, dogs, pug, pugs, gif" />
+
+        <meta name="author" content="Cess Allapitan, Ben Sarmiento" />
+        <meta name="application-name" content="(Pugs) Make Me Happy" />
+
+        <!-- for Facebook -->
+        <meta property="og:title" content="(Pugs) Make Me Happy" />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="http://arch.cessallapitan.me/makemehappy/static/img/pug.jpg" />
+        <meta property="og:url" content="http://arch.cessallapitan.me/makemehappy/" />
+        <meta property="og:description" content="Random pugs to brighten your day" />
+
+        <!-- for Twitter -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="(Pugs) Make Me Happy" />
+        <meta name="twitter:description" content="Random pugs to brighten your day" />
+        <meta name="twitter:image" content="http://arch.cessallapitan.me/makemehappy/static/img/pug.jpg" />
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -47,7 +67,8 @@
           <p id="pug_bay_teaser" class="lead">Click the green button below.</p>
           <p id="that_pug" class="text-center" style="display:none;">
             <input id="that_pug_url" type="text" value="" class="form-control">
-            <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger"></span>
+            <input type="hidden" id="pug_id" value="">
+            <button id="like_pug" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger"></span>
           </p>
         </div>
         <p><a id="pug_bay_btn" class="btn btn-lg btn-success" href="#" role="button">Make Me Happy :)</a></p>
@@ -91,7 +112,7 @@
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
-                    $('#pug_likes').text(data.likes + " people likes this pug");
+                    $('#pug_likes').text(data.likes + " people like this pug");
                     $('#that_pug_url').val(window.location.origin+'/makemehappy/pug/'+data.pug_id);
                     $('#that_pug').show();
                     $('#pug_bay_btn').show();
@@ -99,12 +120,32 @@
                 });
               });
           };
+
           $('#pug_bay_btn').on('click', function () {
             if($('#pug_bay_header')) $('#pug_bay_header').remove();
             pug_bomb();
           });
+
           $("#that_pug_url").on("click", function () {
             $(this).select();
+          });
+
+          $('#like_pug').on('click', function () {
+            $(this).prop('disabled', true);
+            pug_id = $('#pug_id').val();
+            $.ajax({
+              url: "http://arch.cessallapitan.me/makemehappy/like/"+pug_id
+              //url: "http://localhost/pugs.html"
+            })
+              .done(function( data ) {
+                if (data.msg == "error") {
+                  alert(data.error);
+                }
+                else {
+                  $(this).remove();
+                  $('#pug_likes').text($('#pug_likes').text().match(/\d+$/)[0] + " people like this pug");
+                }
+              });
           });
         </script>
     </body>

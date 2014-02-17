@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import random
 from flask import Flask, render_template, url_for, session, request, redirect, jsonify
 from flask_oauth import OAuth
+import datetime
 
 SECRET_KEY = 'makemehappy2014'
 DEBUG = True
@@ -16,6 +17,8 @@ oauth = OAuth()
 client = MongoClient()
 db = client.makemehappy
 pugs = db.pugs
+likes = db.likes
+users = db.users
 
 facebook = oauth.remote_app('facebook',
     base_url='https://graph.facebook.com/',
@@ -79,6 +82,30 @@ def that_pug(pug_id=None):
         pug = pugs.find_one({"id": pug_id})
     return render_template('pug.html', pug=pug)
 
+@app.route('/like/')
+@app.route('/like/<pug_id>')
+def like_pug(pug_id=None):
+    if pug_id is None:
+        return jsonify({'msg':'error', 'error':'pug_id missing'})
+    if session.get('oauth_token'):
+        me = facebook.get('/me')
+        f_id = me.data['id']
+        name = me.data['name']
+        like = likes.find_one({"$and":[{"pug_id": str(pug_id)}, {"f_id": str(f_id)}]})
+        if like:
+            return jsonify({'msg':'error', 'error':'you liked this already'})
+        else:
+            user = users.find_one({"f_id": str(f_id)})
+            if not user:
+                users.insert({"f_id": str(f_id), "name": name, "date": datetime.datetime.utcnow()})
+            likes.insert({"pug_id": str(pug_id), "f_id": str(f_id), "date": datetime.datetime.utcnow()})
+            if is_number(pug_id):
+                pugs.update({'id': int(pug_id)}, {'$inc': {'likes': 1}})
+            else:
+                pugs.update({'id': pug_id}, {'$inc': {'likes': 1}})
+            return jsonify({'msg':'success'})
+    else:
+        return jsonify({'msg':'error', 'error':'you should login first'})
 # PUG GENERATORS
 
 @app.route("/pugs")
