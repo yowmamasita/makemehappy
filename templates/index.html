@@ -29,8 +29,11 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="">Home</a></li>
-          <li><a href="mailto:contact@cessallapitan.me">Contact</a></li>
+          {% if name %}
+          <li>{{ name }}</li>
+          {% else %}
+          <li class="active"><a href="/login">Facebook Login</a></li>
+          {% endif %}
         </ul>
         <h3><span class="text-muted">(Pugs)</span> Make Me Happy</h3>
       </div>

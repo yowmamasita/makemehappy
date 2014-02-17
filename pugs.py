@@ -29,13 +29,15 @@ facebook = oauth.remote_app('facebook',
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    name = None
+    if session.get('oauth_token'):
+        me = facebook.get('/me')
+        name = me.data['name']
+    return render_template('index.html', name=name)
 
 @app.route('/login')
 def login():
-    return facebook.authorize(callback=url_for('facebook_authorized',
-        next=request.args.get('next') or request.referrer or None,
-        _external=True))
+    return facebook.authorize(callback='http://arch.cessallapitan.me/makemehappy/login/authorized')
 
 @app.route('/login/authorized')
 @facebook.authorized_handler
