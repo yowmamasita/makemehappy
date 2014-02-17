@@ -48,6 +48,10 @@ def facebook_authorized(resp):
     return 'Logged in as id=%s name=%s redirect=%s' % \
         (me.data['id'], me.data['name'], request.args.get('next'))
 
+@facebook.tokengetter
+def get_facebook_oauth_token():
+    return session.get('oauth_token')
+
 # PUG GENERATORS
 
 @app.route("/pugs")
