@@ -78,9 +78,9 @@ def that_pug(pug_id=None):
         return redirect(url_for('hello', _external=True))
     if is_number(pug_id):
         pug = pugs.find_one({"id": int(pug_id)})
+        pug['id'] = str(pug['id'])
     else:
         pug = pugs.find_one({"id": pug_id})
-        pug['id'] = str(pug['id'])
     return render_template('pug.html', pug=pug)
 
 @app.route('/like/')
