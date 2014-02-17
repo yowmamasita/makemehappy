@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 import random
-from flask import Flask, render_template, url_for, session, request
+from flask import Flask, render_template, url_for, session, request, redirect
 from flask_oauth import OAuth
 
 SECRET_KEY = 'makemehappy2014'
@@ -44,9 +44,7 @@ def facebook_authorized(resp):
             request.args['error_description']
         )
     session['oauth_token'] = (resp['access_token'], '')
-    me = facebook.get('/me')
-    return 'Logged in as id=%s name=%s redirect=%s' % \
-        (me.data['id'], me.data['name'], request.args.get('next'))
+    return redirect(url_for('check', _external=True))
 
 @facebook.tokengetter
 def get_facebook_oauth_token():
