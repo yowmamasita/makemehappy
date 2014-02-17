@@ -33,7 +33,7 @@
         <meta property="og:title" content="(Pugs) Make Me Happy" />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="{{ pug['url'] }}" />
-        <meta property="og:url" content="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+str(pug['id']) }}" />
+        <meta property="og:url" content="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" />
         <meta property="og:description" content="Random pugs to brighten your day" />
 
         <!-- for Twitter -->
@@ -65,7 +65,7 @@
           <img id="pug_pic" src="{{ pug['url'] }}">
           <p id="pug_bay_teaser" class="lead">ARE YOU HAPPY NOW?</p>
           <p id="that_pug" class="text-center">
-            <input id="that_pug_url" type="text" value="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+str(pug['id']) }}" class="form-control">
+            <input id="that_pug_url" type="text" value="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" class="form-control">
             <input type="hidden" id="pug_id" value="{{ pug['id'] }}">
             <button id="like_pug" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger">{{ pug['likes'] }} people like this pug</span>
           </p>

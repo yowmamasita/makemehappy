@@ -80,6 +80,7 @@ def that_pug(pug_id=None):
         pug = pugs.find_one({"id": int(pug_id)})
     else:
         pug = pugs.find_one({"id": pug_id})
+        pug['id'] = str(pug['id'])
     return render_template('pug.html', pug=pug)
 
 @app.route('/like/')
