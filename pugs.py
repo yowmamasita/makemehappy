@@ -76,12 +76,18 @@ def is_number(s):
 def that_pug(pug_id=None):
     if pug_id is None:
         return redirect(url_for('hello', _external=True))
+    f_id = None
+    name = None
+    if session.get('oauth_token'):
+        me = facebook.get('/me')
+        f_id = me.data['id']
+        name = me.data['name']
     if is_number(pug_id):
         pug = pugs.find_one({"id": int(pug_id)})
         pug['id'] = str(pug['id'])
     else:
         pug = pugs.find_one({"id": pug_id})
-    return render_template('pug.html', pug=pug)
+    return render_template('pug.html', pug=pug, f_id=f_id, name=name)
 
 @app.route('/like/')
 @app.route('/like/<pug_id>')
