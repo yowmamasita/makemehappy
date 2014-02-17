@@ -95,13 +95,11 @@
             pug_bomb();
           });
           $( document ).ready(function() {
-              $('#pug_bay').waitForImages(function() {
-                $('#pug_pic').load(function () {
-                  $('#loading').hide();
-                  $(this).show();
-                  $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
-                  $('#pug_bay_btn').show();
-                });
+              $('#pug_pic').load(function () {
+                $('#loading').hide();
+                $(this).show();
+                $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
+                $('#pug_bay_btn').show();
               });
           });
         </script>
