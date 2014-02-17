@@ -41,9 +41,6 @@
         <meta name="twitter:title" content="(Pugs) Make Me Happy" />
         <meta name="twitter:description" content="Random pugs to brighten your day" />
         <meta name="twitter:image" content="{{ pug['url'] }}" />
-
-        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-        <script type="text/javascript">stLight.options({publisher: "358482b9-e5be-4dbd-be07-954a0557e8a4", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -71,15 +68,22 @@
             <input id="that_pug_url" type="text" value="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" class="form-control">
             <input type="hidden" id="pug_id" value="{{ pug['id'] }}">
             <button id="like_pug" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger">{{ pug['likes'] }} people like this pug</span>
-            <span class='st_fblike_hcount' displayText='Facebook Like'></span>
-            <span class='st_facebook_hcount' displayText='Facebook'></span>
-            <span class='st_twitter_hcount' displayText='Tweet'></span>
           </p>
         </div>
       </div>
 
       <div class="footer">
-        <p>&copy; Cess Allapitan+Ben Sarmiento 2014</p>
+        <p>
+          &copy; Cess Allapitan+Ben Sarmiento 2014
+          <div id="fb-root"></div>
+          <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=131978466977157";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));</script>
+        </p>
       </div>
 
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
