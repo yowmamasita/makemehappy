@@ -44,6 +44,10 @@
           <img id="loading" src="/makemehappy/static/img/loading.gif" style="display:none;">
           <h1 id="pug_bay_header">Feeling stressed?</h1>
           <p id="pug_bay_teaser" class="lead">Click the green button below.</p>
+          <div id="that_pug" class="input-group" style="display:none;">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-link"></span></span>
+            <input type="text" value="{{ pug['url'] }}" class="form-control" readonly>
+          </div>
         </div>
         <p><a id="pug_bay_btn" class="btn btn-lg btn-success" href="#" role="button">Make Me Happy :)</a></p>
       </div>
@@ -73,6 +77,7 @@
             if($('#pug_pic')) $('#pug_pic').remove();
             $('#loading').show();
             $('#pug_bay_teaser').text("LOADING");
+            $('#that_pug').hide();
             $('#pug_bay_btn').hide();
             $.ajax({
               url: "http://arch.cessallapitan.me/makemehappy/pugs"
@@ -85,6 +90,7 @@
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
+                    $('#that_pug').show();
                     $('#pug_bay_btn').show();
                   });
                 });
