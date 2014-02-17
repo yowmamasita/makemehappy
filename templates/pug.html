@@ -44,9 +44,9 @@
         <div id="pug_bay">
           <img id="pug_pic" src="{{ pug['url'] }}">
           <p id="pug_bay_teaser" class="lead">ARE YOU HAPPY NOW?</p>
-          <div id="that_pug">
+          <p id="that_pug">
             <input id="that_pug_url" type="text" value="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" class="form-control">
-          </div>
+          </p>
         </div>
       </div>
 
@@ -68,6 +68,12 @@
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src='//www.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+
+        <script>
+        $("#that_pug_url").on("click", function () {
+          $(this).select();
+        });
         </script>
     </body>
 </html>
