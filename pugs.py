@@ -29,7 +29,8 @@ facebook = oauth.remote_app('facebook',
 
 @app.route('/')
 def hello():
-    f_id, name = None
+    f_id = None
+    name = None
     if session.get('oauth_token'):
         me = facebook.get('/me')
         f_id = me.data['id']
