@@ -24,7 +24,7 @@ facebook = oauth.remote_app('facebook',
     authorize_url='https://www.facebook.com/dialog/oauth',
     consumer_key=FACEBOOK_APP_ID,
     consumer_secret=FACEBOOK_APP_SECRET,
-    request_token_params={'scope': 'email'}
+    request_token_params={'scope': 'email', 'redirect_uri': 'http://arch.cessallapitan.me/makemehappy/login/authorized'}
 )
 
 @app.route('/')
