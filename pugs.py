@@ -61,6 +61,14 @@ def facebook_authorized(resp):
 def get_facebook_oauth_token():
     return session.get('oauth_token')
 
+@app.route('/pug/')
+@app.route('/pug/<pug_id>')
+def that_pug(pug_id=None):
+    if pug_id is None:
+        return redirect(url_for('hello', _external=True))
+    pug = pugs.find_one({"id": pug_id})
+    return render_template('pug.html', pug=pug)
+
 # PUG GENERATORS
 
 @app.route("/pugs")
