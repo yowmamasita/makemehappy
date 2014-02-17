@@ -109,7 +109,8 @@
                   alert(data.error);
                 }
                 else {
-                  $('#pug_likes').text($('#pug_likes').text().match(/\d+/)[0] + " people like this pug");
+                  var like = parseInt($('#pug_likes').text().match(/\d+/)[0], 10)+1;
+                  $('#pug_likes').text(like + " people like this pug");
                 }
               });
           });

@@ -112,6 +112,7 @@
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
+                    $('#like_pug').prop('disabled', false);
                     $('#pug_id').val(data.pug_id);
                     $('#pug_likes').text(data.likes + " people like this pug");
                     $('#that_pug_url').val(window.location.origin+'/makemehappy/pug/'+data.pug_id);
@@ -143,7 +144,8 @@
                   alert(data.error);
                 }
                 else {
-                  $('#pug_likes').text($('#pug_likes').text().match(/\d+/)[0] + " people like this pug");
+                  var like = parseInt($('#pug_likes').text().match(/\d+/)[0], 10)+1;
+                  $('#pug_likes').text(like + " people like this pug");
                 }
               });
           });
