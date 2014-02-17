@@ -21,6 +21,26 @@
         <link rel="stylesheet" href="/makemehappy/static/css/jumbotron-narrow.css">
 
         <script src="/makemehappy/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
+        <!-- for Google -->
+        <meta name="description" content="Random pugs to brighten your day" />
+        <meta name="keywords" content="dog, dogs, pug, pugs, gif" />
+
+        <meta name="author" content="Cess Allapitan, Ben Sarmiento" />
+        <meta name="application-name" content="(Pugs) Make Me Happy" />
+
+        <!-- for Facebook -->
+        <meta property="og:title" content="(Pugs) Make Me Happy" />
+        <meta property="og:type" content="article" />
+        <meta property="og:image" content="{{ pug['url'] }}" />
+        <meta property="og:url" content="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" />
+        <meta property="og:description" content="Random pugs to brighten your day" />
+
+        <!-- for Twitter -->
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="(Pugs) Make Me Happy" />
+        <meta name="twitter:description" content="Random pugs to brighten your day" />
+        <meta name="twitter:image" content="{{ pug['url'] }}" />
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -46,7 +66,7 @@
           <p id="pug_bay_teaser" class="lead">ARE YOU HAPPY NOW?</p>
           <p id="that_pug" class="text-center">
             <input id="that_pug_url" type="text" value="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" class="form-control">
-            <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button>
+            <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger">{{ pug['likes'] }} people likes this pug</span>
           </p>
         </div>
       </div>

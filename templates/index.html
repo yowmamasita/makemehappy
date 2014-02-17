@@ -47,7 +47,7 @@
           <p id="pug_bay_teaser" class="lead">Click the green button below.</p>
           <p id="that_pug" class="text-center" style="display:none;">
             <input id="that_pug_url" type="text" value="" class="form-control">
-            <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button>
+            <button type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger"></span>
           </p>
         </div>
         <p><a id="pug_bay_btn" class="btn btn-lg btn-success" href="#" role="button">Make Me Happy :)</a></p>
@@ -91,6 +91,7 @@
                     $('#loading').hide();
                     $(this).show();
                     $('#pug_bay_teaser').text("ARE YOU HAPPY NOW?");
+                    $('#pug_likes').text(data.likes + " people likes this pug");
                     $('#that_pug_url').val(window.location.origin+'/makemehappy/pug/'+data.pug_id);
                     $('#that_pug').show();
                     $('#pug_bay_btn').show();
