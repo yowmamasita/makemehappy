@@ -16,8 +16,8 @@ pugs = db.pugs
 for subreddit in SUBREDDITS:
 
     r = praw.Reddit(user_agent='pugs.makemehappy')
-    submissions = r.get_subreddit(subreddit).get_new(limit=None)
-    # submissions = r.get_subreddit(subreddit).get_top_from_all(limit=None)
+    # submissions = r.get_subreddit(subreddit).get_new(limit=None)
+    submissions = r.get_subreddit(subreddit).get_top_from_all(limit=None)
 
     for index, submission in enumerate(submissions, start=1):
 
