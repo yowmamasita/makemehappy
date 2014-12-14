@@ -18,9 +18,9 @@
             }
         </style>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="/makemehappy/static/css/jumbotron-narrow.css">
+        <link rel="stylesheet" href="/static/css/jumbotron-narrow.css">
 
-        <script src="/makemehappy/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
         <!-- for Google -->
         <meta name="description" content="Random pugs to brighten your day" />
@@ -32,15 +32,15 @@
         <!-- for Facebook -->
         <meta property="og:title" content="(Pugs) Make Me Happy" />
         <meta property="og:type" content="article" />
-        <meta property="og:image" content="http://arch.cessallapitan.me/makemehappy/static/img/pug.jpg" />
-        <meta property="og:url" content="http://arch.cessallapitan.me/makemehappy/" />
+        <meta property="og:image" content="http://pugs.makemehappy.bensarmiento.com/static/img/pug.jpg" />
+        <meta property="og:url" content="http://pugs.makemehappy.bensarmiento.com/" />
         <meta property="og:description" content="Random pugs to brighten your day" />
 
         <!-- for Twitter -->
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="(Pugs) Make Me Happy" />
         <meta name="twitter:description" content="Random pugs to brighten your day" />
-        <meta name="twitter:image" content="http://arch.cessallapitan.me/makemehappy/static/img/pug.jpg" />
+        <meta name="twitter:image" content="http://pugs.makemehappy.bensarmiento.com/static/img/pug.jpg" />
     </head>
     <body>
       <div id="fb-root"></div>
@@ -57,12 +57,12 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li><a href="/makemehappy/">Home</a></li>
+          <li><a href="/">Home</a></li>
           {% if name %}
           <li><a href="http://fb.com/{{ f_id }}" target="_blank">{{ name }}</a></li>
-          <li><a href="/makemehappy/logout">Logout</a></li>
+          <li><a href="/logout">Logout</a></li>
           {% else %}
-          <li class="active"><a href="/makemehappy/login">Facebook Login</a></li>
+          <li class="active"><a href="/login">Facebook Login</a></li>
           {% endif %}
         </ul>
         <h3><span class="text-muted">(Pugs)</span> Make Me Happy</h3>
@@ -70,7 +70,7 @@
 
       <div class="jumbotron">
         <div id="pug_bay">
-          <img id="loading" src="/makemehappy/static/img/loading.gif" style="display:none;">
+          <img id="loading" src="/static/img/loading.gif" style="display:none;">
           <h1 id="pug_bay_header">Feeling stressed?</h1>
           <p id="pug_bay_teaser" class="lead">Click the green button below.</p>
           <p id="that_pug" class="text-center" style="display:none;">
@@ -84,17 +84,17 @@
 
       <div class="footer">
         <p>&copy; Cess Allapitan+Ben Sarmiento 2014</p>
-        <div class="fb-share-button" data-href="http://arch.cessallapitan.me/makemehappy/" data-type="button_count"></div>
+        <div class="fb-share-button" data-href="http://pugs.makemehappy.bensarmiento.com/" data-type="button_count"></div>
       </div>
 
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/makemehappy/static/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
-        <script src="/makemehappy/static/js/vendor/jquery.waitforimages.min.js"></script>
+        <script src="/static/js/vendor/jquery.waitforimages.min.js"></script>
 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-        <script src="/makemehappy/static/js/main.js"></script>
+        <script src="/static/js/main.js"></script>
 
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -111,7 +111,7 @@
             $('#that_pug').hide();
             $('#pug_bay_btn').hide();
             $.ajax({
-              url: "http://arch.cessallapitan.me/makemehappy/pugs"
+              url: "http://pugs.makemehappy.bensarmiento.com/pugs"
               //url: "http://localhost/pugs.html"
             })
               .done(function( data ) {
@@ -124,7 +124,7 @@
                     $('#like_pug').prop('disabled', false);
                     $('#pug_id').val(data.pug_id);
                     $('#pug_likes').text(data.likes + " people like this pug");
-                    $('#that_pug_url').val(window.location.origin+'/makemehappy/pug/'+data.pug_id);
+                    $('#that_pug_url').val(window.location.origin+'/pug/'+data.pug_id);
                     $('#that_pug').show();
                     $('#pug_bay_btn').show();
                   });
@@ -145,7 +145,7 @@
             $(this).prop('disabled', true);
             pug_id = $('#pug_id').val();
             $.ajax({
-              url: "http://arch.cessallapitan.me/makemehappy/like/"+pug_id
+              url: "http://pugs.makemehappy.bensarmiento.com/like/"+pug_id
               //url: "http://localhost/pugs.html"
             })
               .done(function( data ) {

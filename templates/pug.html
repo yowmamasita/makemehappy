@@ -18,9 +18,9 @@
             }
         </style>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="/makemehappy/static/css/jumbotron-narrow.css">
+        <link rel="stylesheet" href="/static/css/jumbotron-narrow.css">
 
-        <script src="/makemehappy/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="/static/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 
         <!-- for Google -->
         <meta name="description" content="Random pugs to brighten your day" />
@@ -33,7 +33,7 @@
         <meta property="og:title" content="(Pugs) Make Me Happy" />
         <meta property="og:type" content="article" />
         <meta property="og:image" content="{{ pug['url'] }}" />
-        <meta property="og:url" content="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" />
+        <meta property="og:url" content="{{ 'http://pugs.makemehappy.bensarmiento.com/pug/'+pug['id'] }}" />
         <meta property="og:description" content="Random pugs to brighten your day" />
 
         <!-- for Twitter -->
@@ -57,12 +57,12 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li><a href="/makemehappy/">Home</a></li>
+          <li><a href="/">Home</a></li>
           {% if name %}
           <li><a href="http://fb.com/{{ f_id }}" target="_blank">{{ name }}</a></li>
-          <li><a href="/makemehappy/logout">Logout</a></li>
+          <li><a href="/logout">Logout</a></li>
           {% else %}
-          <li class="active"><a href="/makemehappy/login">Facebook Login</a></li>
+          <li class="active"><a href="/login">Facebook Login</a></li>
           {% endif %}
         </ul>
         <h3><span class="text-muted">(Pugs)</span> Make Me Happy</h3>
@@ -73,12 +73,12 @@
           <img id="pug_pic" src="{{ pug['url'] }}">
           <p id="pug_bay_teaser" class="lead">ARE YOU HAPPY NOW?</p>
           <p id="that_pug" class="text-center">
-            <input id="that_pug_url" type="text" value="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" class="form-control">
+            <input id="that_pug_url" type="text" value="{{ 'http://pugs.makemehappy.bensarmiento.com/pug/'+pug['id'] }}" class="form-control">
             <input type="hidden" id="pug_id" value="{{ pug['id'] }}">
             <button id="like_pug" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger">{{ pug['likes'] }} people like this pug</span>
-            <div class="fb-share-button" data-href="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" data-type="button_count"></div>
+            <div class="fb-share-button" data-href="{{ 'http://pugs.makemehappy.bensarmiento.com/pug/'+pug['id'] }}" data-type="button_count"></div>
           </p>
-          <div class="fb-comments" data-href="{{ 'http://arch.cessallapitan.me/makemehappy/pug/'+pug['id'] }}" data-numposts="10" data-colorscheme="light" data-mobile="true"></div>
+          <div class="fb-comments" data-href="{{ 'http://pugs.makemehappy.bensarmiento.com/pug/'+pug['id'] }}" data-numposts="10" data-colorscheme="light" data-mobile="true"></div>
         </div>
       </div>
 
@@ -87,13 +87,13 @@
       </div>
 
     </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="/makemehappy/static/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="/static/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
-        <script src="/makemehappy/static/js/vendor/jquery.waitforimages.min.js"></script>
+        <script src="/static/js/vendor/jquery.waitforimages.min.js"></script>
 
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-        <script src="/makemehappy/static/js/main.js"></script>
+        <script src="/static/js/main.js"></script>
 
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -111,7 +111,7 @@
             $(this).prop('disabled', true);
             pug_id = $('#pug_id').val();
             $.ajax({
-              url: "http://arch.cessallapitan.me/makemehappy/like/"+pug_id
+              url: "http://pugs.makemehappy.bensarmiento.com/like/"+pug_id
               //url: "http://localhost/pugs.html"
             })
               .done(function( data ) {
