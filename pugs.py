@@ -33,6 +33,14 @@ facebook = oauth.remote_app('facebook',
                             )
 
 
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+
+
 @app.route('/')
 def hello():
     f_id = None
@@ -53,6 +61,11 @@ def login():
 def logout():
     session.pop('oauth_token', None)
     return redirect(url_for('hello', _external=True))
+
+
+@facebook.tokengetter
+def get_facebook_oauth_token(token=None):
+    return session.get('oauth_token')
 
 
 @app.route('/login/authorized')
@@ -142,16 +155,3 @@ def random_mixed_pugs():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
-
-
-@facebook.tokengetter
-def get_facebook_oauth_token():
-    return session.get('oauth_token')
-
-
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        return False
