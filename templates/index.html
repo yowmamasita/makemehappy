@@ -74,13 +74,12 @@
           <h1 id="pug_bay_header">Feeling stressed?</h1>
           <p id="pug_bay_teaser" class="lead">Click the green button below.</p>
           <p id="that_pug" class="text-center" style="display:none;">
-            <div class="input-group">
+            <div id="that_pug_grp" class="input-group">
               <input id="that_pug_url" type="text" value="" class="form-control">
               <span class="input-group-btn">
                 <button id="view_that_pug" class="btn btn-info" type="button">Go!</button>
               </span>
             </div>
-            <input id="that_pug_url" type="text" value="" class="form-control">
             <input type="hidden" id="pug_id" value="">
             <button id="like_pug" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-heart"></span></button> <span id="pug_likes" class="label label-danger"></span>
           </p>
@@ -115,6 +114,7 @@
             $('#loading').show();
             $('#pug_bay_teaser').text("LOADING");
             $('#that_pug').hide();
+            $('#that_pug_grp').hide();
             $('#pug_bay_btn').hide();
             $.ajax({
               url: "http://pugs.makemehappy.bensarmiento.com/pugs"
@@ -132,6 +132,7 @@
                     $('#pug_likes').text(data.likes + " people like this pug");
                     $('#that_pug_url').val(window.location.origin+'/pug/'+data.pug_id);
                     $('#that_pug').show();
+                    $('#that_pug_grp').show();
                     $('#pug_bay_btn').show();
                   });
                 });
