@@ -141,7 +141,7 @@ def random_mixed_pugs():
     return jsonify({'pug_id': str(pug['id']), 'likes': pug['likes'], 'url': pug['url']})
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0', port=80)
 
 
 @facebook.tokengetter
