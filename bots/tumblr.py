@@ -18,7 +18,7 @@ for tag in ['pug', 'pugs', 'pug+gif', 'pug+gifs']:
         breaker = 5
         while r.status_code != 200 and breaker >= 0:
             breaker -= 1
-            print "Request error: "+url
+            print "Request error: " + url
             time.sleep(15)
             r = requests.get(url)
     except:
@@ -39,11 +39,11 @@ for tag in ['pug', 'pugs', 'pug+gif', 'pug+gifs']:
                 breaker = 5
                 while response.status_code != 200 and breaker >= 0:
                     breaker -= 1
-                    print "Request error: "+photo
+                    print "Request error: " + photo
                     time.sleep(15)
                     response = requests.get(photo, stream=True)
             except:
-                print "Request fatal error: "+photo
+                print "Request fatal error: " + photo
                 continue
             if breaker < 0:
                 continue
@@ -70,7 +70,7 @@ for tag in ['pug', 'pugs', 'pug+gif', 'pug+gifs']:
                     # print "Not animated: "+photo
                 else:
                     animated = 1
-                    print "Animated: "+photo
+                    print "Animated: " + photo
                 post = {"id": _id,
                         "url": photo,
                         "likes": 1,

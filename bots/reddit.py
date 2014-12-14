@@ -17,7 +17,7 @@ for sr in ['pugs', 'pug', 'Puggifs']:
     xx = 0
     for x in submissions:
         xx += 1
-        print str(xx)+" >>> "+x.url+" ("+sr+")"
+        print str(xx) + " >>> " + x.url + " (" + sr + ")"
         not_a_gif = 0
         if pugs.find_one({"$or": [{"id": x.id}, {"url": x.url}]}):
             # print "Dupe: "+x.url
@@ -28,11 +28,11 @@ for sr in ['pugs', 'pug', 'Puggifs']:
                 breaker = 5
                 while response.status_code != 200 and breaker >= 0:
                     breaker -= 1
-                    print "Request error: "+x.url
+                    print "Request error: " + x.url
                     time.sleep(15)
                     response = requests.get(x.url, stream=True)
             except:
-                print "Request fatal error: "+x.url
+                print "Request fatal error: " + x.url
                 continue
             if breaker < 0:
                 continue
@@ -59,7 +59,7 @@ for sr in ['pugs', 'pug', 'Puggifs']:
                     # print "Not animated: "+x.url
                 else:
                     animated = 1
-                    print "Animated: "+x.url
+                    print "Animated: " + x.url
                 post = {"id": x.id,
                         "url": x.url,
                         "likes": 1,
