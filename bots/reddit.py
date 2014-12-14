@@ -1,69 +1,85 @@
-import praw
 from pymongo import MongoClient
 import datetime
 import requests
 import time
 import Image
 import magic
+import praw
 
-for sr in ['pugs', 'pug', 'Puggifs']:
-    client = MongoClient()
-    db = client.makemehappy
-    pugs = db.pugs
+SUBREDDITS = ['pugs', 'pug', 'Puggifs']
 
-    r = praw.Reddit(user_agent='pugsmakemehappy')
-    # submissions = r.get_subreddit(sr).get_top_from_all(limit=None)
-    submissions = r.get_subreddit(sr).get_new(limit=None)
-    xx = 0
-    for x in submissions:
-        xx += 1
-        print str(xx) + " >>> " + x.url + " (" + sr + ")"
+# setup db
+client = MongoClient()
+db = client.makemehappy
+pugs = db.pugs
+
+for subreddit in SUBREDDITS:
+
+    r = praw.Reddit(user_agent='pugs.makemehappy')
+    submissions = r.get_subreddit(subreddit).get_new(limit=None)
+    # submissions = r.get_subreddit(subreddit).get_top_from_all(limit=None)
+
+    for index, submission in enumerate(submissions, start=1):
+
         not_a_gif = 0
-        if pugs.find_one({"$or": [{"id": x.id}, {"url": x.url}]}):
-            # print "Dupe: "+x.url
+        # existing?
+        if pugs.find_one({"$or": [{"id": submission.id}, {"url": submission.url}]}):
             continue
+
         else:
             try:
-                response = requests.get(x.url, stream=True)
+                # download photo for analysis
+                response = requests.get(submission.url, stream=True)
                 breaker = 5
                 while response.status_code != 200 and breaker >= 0:
                     breaker -= 1
-                    print "Request error: " + x.url
+                    print "Request error:", submission.url
                     time.sleep(15)
-                    response = requests.get(x.url, stream=True)
+                    response = requests.get(submission.url, stream=True)
+
             except:
-                print "Request fatal error: " + x.url
+                print "Request error:", submission.url
                 continue
+
             if breaker < 0:
                 continue
-            filepath = "/var/www/cess/makemehappy/test.gif"
-            mime = "foo/bar"
+
+            filepath = "reddit.gif"
+
             with open(filepath, 'w') as f:
+
                 chunk = response.iter_content(256).next()
                 f.write(chunk)
                 mime = magic.from_buffer(chunk, mime=True)
+
                 if "image" not in mime:
-                    # print mime+" not a gif: "+x.url
+                    # NOT A GIF
                     not_a_gif = 1
                 else:
+                    # continue download
                     for chunk in response.iter_content(256):
                         f.write(chunk)
-            # f.close()
+
+            # if it is a gif, check if animated
             if not_a_gif == 0:
                 animated = 0
                 gif = Image.open(filepath)
+
                 try:
                     gif.seek(1)
                 except EOFError:
+                    # NOT ANIMATED
                     animated = 0
-                    # print "Not animated: "+x.url
                 else:
                     animated = 1
-                    print "Animated: " + x.url
-                post = {"id": x.id,
-                        "url": x.url,
-                        "likes": 1,
-                        "animated": animated,
-                        "mime": mime,
-                        "date": datetime.datetime.utcnow()}
+
+                post = {
+                    "id": submission.id,
+                    "url": submission.url,
+                    "likes": 1,
+                    "animated": animated,
+                    "mime": mime,
+                    "date": datetime.datetime.utcnow()
+                }
                 pugs.insert(post)
+                print post

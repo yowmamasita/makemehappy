@@ -8,14 +8,14 @@ import magic
 API_KEY = "&api_key=d0wby4txhKrlfdHmN7WvAy5VDEs11ltp1ZOAH8xqQBgVZYxS5S"
 SEARCH_TERMS = ['pug', 'pugs', 'pug+gif', 'pug+gifs']
 
+# setup db
+client = MongoClient()
+db = client.makemehappy
+pugs = db.pugs
+
 for tag in SEARCH_TERMS:
     # build url
     url = "http://api.tumblr.com/v2/tagged?tag=" + tag + API_KEY
-
-    # setup db
-    client = MongoClient()
-    db = client.makemehappy
-    pugs = db.pugs
 
     # try searching for tag
     try:
@@ -23,7 +23,7 @@ for tag in SEARCH_TERMS:
         breaker = 5
         while r.status_code != 200 and breaker >= 0:
             breaker -= 1
-            print "Request error: " + url
+            print "Request error:", url
             time.sleep(15)
             r = requests.get(url)
     except:
@@ -53,12 +53,12 @@ for tag in SEARCH_TERMS:
                 breaker = 5
                 while response.status_code != 200 and breaker >= 0:
                     breaker -= 1
-                    print "Request error: " + photo
+                    print "Request error:", photo
                     time.sleep(15)
                     response = requests.get(photo, stream=True)
 
             except:
-                print "Request error: " + photo
+                print "Request error:", photo
                 continue
 
             if breaker < 0:
